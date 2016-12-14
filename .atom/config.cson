@@ -1,0 +1,91 @@
+"*":
+  "advanced-open-file": {}
+  "atom-alignment": {}
+  "atom-beautify":
+    _analyticsUserId: "9ec032e0-bd57-4a12-adb9-3a23f374fd03"
+    general:
+      _analyticsUserId: "edf70527-fe5f-45e8-a18e-097127a0f911"
+  "atom-material-ui":
+    colors:
+      abaseColor: "#7386f0"
+      accentColor: "#fefdff"
+      predefinedColor: "Indigo"
+    fonts: {}
+    tabs:
+      compactTabs: true
+    treeView:
+      compactList: true
+    ui:
+      panelContrast: true
+  autocomplete:
+    includeCompletionsFromAllBuffers: true
+  "autocomplete-plus":
+    confirmCompletion: "enter"
+  core:
+    audioBeep: false
+    disabledPackages: [
+      "vim-mode"
+    ]
+    followSymlinks: true
+    packagesWithKeymapsDisabled: [
+      "react"
+    ]
+    telemetryConsent: "limited"
+    themes: [
+      "atom-material-ui"
+      "atom-material-syntax"
+    ]
+  editor:
+    fontFamily: "Ricty"
+    invisibles: {}
+    showIndentGuide: true
+    showInvisibles: true
+    softWrap: true
+    softWrapAtPreferredLineLength: true
+  emmet: {}
+  "exception-reporting":
+    userId: "4091fb18-a130-76bf-f62a-ac6fc62ff049"
+  "fancy-new-file":
+    caseSensitiveAutoCompletion: true
+    showFilesInAutoComplete: true
+    suggestCurrentFilePath: true
+  "git-plus":
+    gitPath: "/usr/local/bin/git"
+  linter:
+    errorPanelHeight: 101
+    ignoredLinterErrors: [
+      "jshint"
+    ]
+    showErrorInline: false
+    statusBar: "Show error of the selected line"
+  "linter-eslint": {}
+  "linter-jshint":
+    jshintExecutablePath: "/Users/murayamakazuki/.nodebrew/current/bin/jshint"
+  "linter-ruby":
+    rubyExecutablePath: "/Users/murayamakazuki/.rbenv/shims/ruby"
+  "markdown-preview":
+    breakOnSingleNewline: true
+    useGitHubStyle: true
+  metrics:
+    userId: "3051bdf0699387fee9757759f306aac38dc9f1e1"
+  minimap:
+    plugins:
+      "git-diff": true
+      "git-diffDecorationsZIndex": 0
+  "project-manager": {}
+  react: {}
+  script: {}
+  "spell-check":
+    grammars: [
+      "source.gfm"
+      "text.git-commit"
+      "text.plain"
+    ]
+  term3: {}
+  "tool-bar":
+    iconSize: "16px"
+    position: "Bottom"
+  "tree-view":
+    hideVcsIgnoredFiles: true
+  welcome:
+    showOnStartup: false

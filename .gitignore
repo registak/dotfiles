@@ -1,0 +1,42 @@
+.DS_Store
+*.log
+*.swp
+
+# 全てのファイルを一度、無視
+/*
+/.*
+
+# "無視したくないファイル"は以下に"![ファイル名]"で指定
+##### Gitで管理するファイルリスト #####
+!/setup.sh
+!/README.md
+!/.bash_profile
+!/.bashrc
+!/.vimrc
+!/.vim
+!/.gitignore
+!/.gitconfig
+!/.gitmodules
+!/.zshrc
+!/.zshenv
+!/.zsh.d
+!/.config
+!/.atom
+!/.tmux.conf
+!/brew
+
+# 上記に"無視したくないファイル"としてリスト化した中から、さらに"無視したいファイル"を指定
+/.vim/bundle
+/.vim/.netrwhist
+/.vim/view
+/.atom/compile-cache
+/.atom/storage
+/.atom/packages
+/.atom/.node-gyp
+/.atom/projects.cson
+/.atom/.apm
+/.atom/.npm
+/.atom/blob-store
+/.atom/electron
+/.config/configstore
+/.config/Fritzing/
