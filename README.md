@@ -8,4 +8,4 @@ clone this repository
 
 `setup.sh` makes symbolic link
 
-    $ sh setup.sh
+    $ rake symlinks -t
