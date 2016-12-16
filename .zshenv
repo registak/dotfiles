@@ -10,4 +10,4 @@ fi
 # --------------------------------
 export GOROOT=/usr/local/opt/go/libexec
 export GOPATH=${HOME}/golang
-export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
+export PATH=$PATH:/usr/local/opt/go/libexec/bin
