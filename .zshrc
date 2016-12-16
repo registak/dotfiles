@@ -49,8 +49,8 @@ fi
 # --------------------------------
 # ---- zsh-syntax-highlighting ---
 # --------------------------------
-if [ -f ~/.zsh.d/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-  source ~/.zsh.d/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [ -e /usr/local/share/zsh-syntax-highlighting ]; then
+  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
 # --------------------------------

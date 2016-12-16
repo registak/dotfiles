@@ -8,7 +8,7 @@
 
 # "無視したくないファイル"は以下に"![ファイル名]"で指定
 ##### Gitで管理するファイルリスト #####
-!/setup.sh
+!/Rakefile
 !/README.md
 !/.bash_profile
 !/.bashrc
