@@ -173,6 +173,31 @@ alias tmuxkillall="tmux ls | cut -d : -f 1 | xargs -I {} tmux kill-session -t {}
 alias ctag="ctags -R --exclude=.git --exclude=node_modules"
 
 # --------------------------------
+# ----------- lang -----------
+# --------------------------------
+
+# nodebrew
+if [ -e "$HOME/.nodebrew"  ] ; then
+  export PATH=$HOME/.nodebrew/current/bin:$PATH
+fi
+
+# golang
+if type go &>/dev/null; then
+  export GOPATH="$HOME/golang"
+  [[ -d "${HOME}/golang" ]] || mkdir "${HOME}/golang"
+  path=($path ${GOPATH}/bin)
+fi
+
+# pyenv
+if [ -e "$HOME/.pyenv" ]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)";
+  eval "$(pyenv virtualenv-init -)"
+fi
+
+
+# --------------------------------
 # ------------ COLORS ------------
 # --------------------------------
 setopt promptsubst
