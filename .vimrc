@@ -1,28 +1,30 @@
-if has('vim_starting')
- if &compatible
-   set nocompatible
- endif
- set runtimepath+=~/.vim/bundle/neobundle.vim/
+let s:dein_dir = expand('~/.vim/plugins')
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+
+if &runtimepath !~# '/dein.vim'
+  if !isdirectory(s:dein_repo_dir)
+    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+  endif
+  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
 endif
 
-call neobundle#begin(expand('~/.vim/bundle/'))
-
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimfiler.vim'
-NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'rking/ag.vim'
-NeoBundle 'itchyny/lightline.vim'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'scrooloose/nerdtree'
-call neobundle#end()
-
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
+  call dein#add('Shougo/dein.vim')
+  call dein#add ('Shougo/neocomplcache')
+  call dein#add ('Shougo/unite.vim')
+  call dein#add ('Shougo/vimfiler.vim')
+  call dein#add ('w0ng/vim-hybrid')
+  call dein#add ('rking/ag.vim')
+  call dein#add ('itchyny/lightline.vim')
+  call dein#add ('tpope/vim-fugitive')
+  call dein#add ('scrooloose/nerdtree')
+endif
+if dein#check_install()
+  call dein#install()
+endif
+call dein#end()
 filetype plugin indent on
-
-NeoBundleCheck
-
 
 " Switch syntax highlighting on, when the terminal has colors
 syntax on

@@ -46,6 +46,9 @@ function tmuxkill() {
 if [ -e /usr/local/share/zsh-completions ]; then
   fpath=(/usr/local/share/zsh-completions $fpath)
 fi
+if [ -e ~/.vim/completion ]; then
+  fpath=(~/.vim/completion $fpath)
+fi
 # --------------------------------
 # ---- zsh-syntax-highlighting ---
 # --------------------------------
@@ -64,7 +67,7 @@ fi
 # --------- COMPLETION -----------
 # --------------------------------
 # activate completion
-autoload -U compinit && compinit
+autoload -Uz compinit && compinit -i
 zmodload -i zsh/complist
 
 # man zshcontrib
@@ -119,6 +122,10 @@ zstyle ':completion:*' ignore-parents parent pwd ..
 
 # list of processes to kill
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
+
+# enable docker completion
+zstyle ':completion:*:*:docker:*' option-stacking yes
+zstyle ':completion:*:*:docker-*:*' option-stacking yes
 
 # --------------------------------
 # ----------- HISTORY ------------

@@ -13,9 +13,9 @@ export GOPATH=${HOME}/golang
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
 # --------------------------------
-# -------------- pyenv --------------
+# -------------- pyenv -----------
 # --------------------------------
-if which pyenv > /dev/null; then
+if which pyenv > /dev/null ; then
   eval "$(pyenv init -)";
   eval "$(pyenv virtualenv-init -)"
 fi

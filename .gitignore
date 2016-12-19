@@ -23,12 +23,9 @@
 !/.config
 !/.atom
 !/.tmux.conf
-!/brew
 
 # 上記に"無視したくないファイル"としてリスト化した中から、さらに"無視したいファイル"を指定
-/.vim/bundle
-/.vim/.netrwhist
-/.vim/view
+/.vim/plugins
 /.atom/compile-cache
 /.atom/storage
 /.atom/packages
