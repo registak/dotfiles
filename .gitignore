@@ -18,7 +18,7 @@
 !/.gitconfig
 !/.gitmodules
 !/.zshrc
-!/.zshenv
+!/.zsh-alias
 !/.zsh.d
 !/.config
 !/.atom

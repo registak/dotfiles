@@ -137,40 +137,9 @@ HISTFILE=~/.zsh_history
 # --------------------------------
 # ------------ ALIAS -------------
 # --------------------------------
-# ===== suffix alias
-alias -s py=python
-alias -s rb=ruby
-alias -s js=node
-alias -s coffee=coffee
-# ===== image file
-if which open > /dev/null 2>&1 ; then
-  alias -s png="open"
-  alias -s jpg="open"
-  alias -s jpeg="open"
-  alias -s gif="open"
+if [[ -f "${HOME}/.zsh-alias" ]]; then
+  source "${HOME}/.zsh-alias"
 fi
-# ===== html file
-if [ `uname` = "Darwin" ]; then
-  alias google-chrome='open -a Google\ Chrome'
-fi
-alias chrome='google-chrome'
-alias -s html=chrome
-# ===== directory alias
-alias ls="ls -GAF"
-alias ll="ls -lh"
-alias gs='git status --short --branch'
-alias ...="cd ../.."
-alias ....="cd ../../.."
-# ===== sudo
-alias _="sudo"
-# ===== vim
-alias vi="vim"
-# ===== tmux
-alias tat='tmux new-session -As $(basename "$PWD" | tr . -)' # will attach if session exists, or create a new session
-alias tmuxsrc="tmux source-file ~/.tmux.conf"
-alias tmuxkillall="tmux ls | cut -d : -f 1 | xargs -I {} tmux kill-session -t {}" # tmux kill all sessions
-# ===== ctag
-alias ctag="ctags -R --exclude=.git --exclude=node_modules"
 
 # --------------------------------
 # ----------- lang -----------
