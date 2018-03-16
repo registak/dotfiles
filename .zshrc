@@ -8,11 +8,32 @@ export MANPAGER="less -X" # Don’t clear the screen after quitting a manual pag
 export TERM="screen-256color"
 export CLICOLOR=1
 export LSCOLORS=Gxfxcxdxbxegedabagacad
-export LS_COLORS=Gxfxcxdxbxegedabagacad
 
 # --------------------------------
-# ----------- rbenv --------------
+# ----------- lang ---------------
 # --------------------------------
+
+# nodebrew
+if [ -e "$HOME/.nodebrew"  ] ; then
+  export PATH=$HOME/.nodebrew/current/bin:$PATH
+fi
+
+# golang
+if type go &>/dev/null; then
+  export GOPATH="$HOME/golang"
+  [[ -d "${HOME}/golang" ]] || mkdir "${HOME}/golang"
+  path=($path ${GOPATH}/bin)
+fi
+
+# pyenv
+if [ -e "$HOME/.pyenv" ]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)";
+  eval "$(pyenv virtualenv-init -)"
+fi
+
+# rbenv
 if [ -d ${HOME}/.rbenv  ] ; then
   eval "$(rbenv init -)"
 fi
@@ -46,8 +67,9 @@ function tmuxkill() {
 if [ -e /usr/local/share/zsh-completions ]; then
   fpath=(/usr/local/share/zsh-completions $fpath)
 fi
-if [ -e ~/.vim/completion ]; then
-  fpath=(~/.vim/completion $fpath)
+
+if [ -e ~/.zsh.d/completion ]; then
+  fpath=(~/.zsh.d/completion $fpath)
 fi
 # --------------------------------
 # ---- zsh-syntax-highlighting ---
@@ -55,7 +77,12 @@ fi
 if [ -e /usr/local/share/zsh-syntax-highlighting ]; then
   source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
-
+# -------------------------------
+# --- zsh-syntax-highlighting ---
+# -------------------------------
+if [ -e /usr/local/share/zsh-autosuggestions ]; then
+  source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
 # --------------------------------
 # ---- peco setting---
 # --------------------------------
@@ -63,6 +90,7 @@ if [[ -f `command -v peco` ]] ; then
   source ~/.zsh.d/peco.zsh
   alias peco='peco --rcfile ~/.config/peco/config.json'
 fi
+
 # --------------------------------
 # --------- COMPLETION -----------
 # --------------------------------
@@ -142,31 +170,6 @@ if [[ -f "${HOME}/.zsh-alias" ]]; then
 fi
 
 # --------------------------------
-# ----------- lang -----------
-# --------------------------------
-
-# nodebrew
-if [ -e "$HOME/.nodebrew"  ] ; then
-  export PATH=$HOME/.nodebrew/current/bin:$PATH
-fi
-
-# golang
-if type go &>/dev/null; then
-  export GOPATH="$HOME/golang"
-  [[ -d "${HOME}/golang" ]] || mkdir "${HOME}/golang"
-  path=($path ${GOPATH}/bin)
-fi
-
-# pyenv
-if [ -e "$HOME/.pyenv" ]; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init -)";
-  eval "$(pyenv virtualenv-init -)"
-fi
-
-
-# --------------------------------
 # ------------ COLORS ------------
 # --------------------------------
 setopt promptsubst
@@ -186,6 +189,9 @@ export PR_BOLD_WHITE PR_BOLD_BLACK
 
 # Clear LSCOLORS
 unset LSCOLORS
+
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
+bindkey '^ ' autosuggest-accept
 
 # --------------------------------
 # ------------ OPTIONS -----------
@@ -222,6 +228,8 @@ setopt always_to_end # When completing from the middle of a word, move the curso
 setopt auto_menu # show completion menu on successive tab press. needs unsetop menu_complete to work
 setopt auto_name_dirs # any parameter that is set to the absolute name of a directory immediately becomes a name for that directory
 setopt complete_in_word # Allow completion from within a word/phrase
+setopt magic_equal_subst
+setopt auto_param_slash
 
 unsetopt menu_complete # do not autoselect the first completion entry
 

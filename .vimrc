@@ -153,7 +153,7 @@ inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplcache#close_popup()
 inoremap <expr><C-e>  neocomplcache#cancel_popup()
 
-set guifont=Ricty\ for\ Powerline:h18
+set guifont=Ricty\ for\ Powerline
 " vim-lightline setting
 let g:lightline = {
   \ 'colorscheme': 'jellybeans',

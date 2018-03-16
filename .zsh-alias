@@ -1,10 +1,12 @@
 # --------------------------------
 # ------------ ALIAS -------------
 # --------------------------------
+
 # ===== suffix alias
 alias -s py=python
 alias -s rb=ruby
 alias -s njs=node
+
 # ===== image file
 if which open > /dev/null 2>&1 ; then
   alias -s png="open"
@@ -12,25 +14,39 @@ if which open > /dev/null 2>&1 ; then
   alias -s jpeg="open"
   alias -s gif="open"
 fi
+
 # ===== html file
 if [ `uname` = "Darwin" ]; then
   alias google-chrome='open -a Google\ Chrome'
 fi
 alias chrome='google-chrome'
 alias -s html=chrome
+
 # ===== directory alias
 alias ls="ls -GAF"
 alias ll="ls -lh"
+alias lc="colorls -r"
 alias gs='git status --short --branch'
 alias ...="cd ../.."
 alias ....="cd ../../.."
+
 # ===== sudo
 alias _="sudo"
+
 # ===== vim
 alias vi="vim"
+
 # ===== tmux
 alias tat='tmux new-session -As $(basename "$PWD" | tr . -)' # will attach if session exists, or create a new session
 alias tmuxsrc="tmux source-file ~/.tmux.conf"
 alias tmuxkillall="tmux ls | cut -d : -f 1 | xargs -I {} tmux kill-session -t {}"
+
 # ===== ctag
 alias ctag="ctags -R --exclude=.git --exclude=node_modules"
+
+# ===== system
+alias myip="ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'"
+
+# ==== for atom beta
+alias atom="atom-beta"
+alias apm="apm-beta"

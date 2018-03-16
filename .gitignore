@@ -1,13 +1,12 @@
-.DS_Store
+.DS_Store*
 *.log
 *.swp
 
-# 全てのファイルを一度、無視
+##### ignore all files #####
 /*
 /.*
 
-# "無視したくないファイル"は以下に"![ファイル名]"で指定
-##### Gitで管理するファイルリスト #####
+##### git manegement #####
 !/Rakefile
 !/README.md
 !/.bash_profile
@@ -24,7 +23,8 @@
 !/.atom
 !/.tmux.conf
 
-# 上記に"無視したくないファイル"としてリスト化した中から、さらに"無視したいファイル"を指定
+# ignore files or dir form git manegement
+
 /.vim/plugins
 /.atom/compile-cache
 /.atom/storage
@@ -35,5 +35,11 @@
 /.atom/.npm
 /.atom/blob-store
 /.atom/electron
+/.atom/recovery
 /.config/configstore
 /.config/Fritzing/
+/.config/stetic
+/.config/xbuild
+/.config/NuGet
+/.config/gocode
+/.config/heroku

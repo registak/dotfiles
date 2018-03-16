@@ -1,5 +1,5 @@
 [core]
-	excludesfile = $HOME/.gitignore_global
+	excludesfile = /Users/murayamakazuki/.gitignore_global
 [color]
     ui = auto
     status = auto
@@ -13,10 +13,12 @@
     diff = diff-highlight | less
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
+	path = 
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [user]
 	name = registak
 	email = prkaz4m@gmail.com
+[commit]
+	template = ~/.stCommitMsg
