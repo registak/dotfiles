@@ -46,7 +46,3 @@ alias ctag="ctags -R --exclude=.git --exclude=node_modules"
 
 # ===== system
 alias myip="ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'"
-
-# ==== for atom beta
-alias atom="atom-beta"
-alias apm="apm-beta"
