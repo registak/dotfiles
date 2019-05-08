@@ -14,9 +14,12 @@ export LSCOLORS=Gxfxcxdxbxegedabagacad
 # --------------------------------
 
 # nodebrew
-if [ -e "$HOME/.nodebrew"  ] ; then
+if [ -e "$HOME/.nodebrew" ]; then
   export PATH=$HOME/.nodebrew/current/bin:$PATH
 fi
+
+# yarn
+export PATH="$PATH:`yarn global bin`"
 
 # golang
 if type go &>/dev/null; then
@@ -27,23 +30,18 @@ fi
 
 # pyenv
 if [ -e "$HOME/.pyenv" ]; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init -)";
+  export PYENV_ROOT="${HOME}/.pyenv"
+  export PATH="${PYENV_ROOT}/bin:$PATH"
+  if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+  fi
   eval "$(pyenv virtualenv-init -)"
 fi
 
 # rbenv
-if [ -d ${HOME}/.rbenv  ] ; then
+if [ -d ${HOME}/.rbenv  ]; then
   eval "$(rbenv init -)"
 fi
-
-# --------------------------------
-# ------------ RUBY --------------
-# --------------------------------
-function get_ruby_version() {
-  ruby -v | awk '{print $1 " " $2}'
-}
 
 # --------------------------------
 # ------------ TMUX --------------
