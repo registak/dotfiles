@@ -12,10 +12,17 @@ export LSCOLORS=Gxfxcxdxbxegedabagacad
 # --------------------------------
 # ----------- lang ---------------
 # --------------------------------
+# anyenv
+if [ -d "$HOME/.anyenv" ]; then
+  export PATH="$HOME/.anyenv/bin:$PATH"
+  eval "$(anyenv init -)"
+fi
 
-# nodebrew
-if [ -e "$HOME/.nodebrew" ]; then
-  export PATH=$HOME/.nodebrew/current/bin:$PATH
+
+# nodeenv
+if [ -d "$HOME/.nodenv" ]; then
+  export PATH="$HOME/.nodenv/bin:$PATH"
+  eval "$(nodenv init -)"
 fi
 
 # yarn
@@ -29,7 +36,7 @@ if type go &>/dev/null; then
 fi
 
 # pyenv
-if [ -e "$HOME/.pyenv" ]; then
+if [ -d "$HOME/.pyenv" ]; then
   export PYENV_ROOT="${HOME}/.pyenv"
   export PATH="${PYENV_ROOT}/bin:$PATH"
   if command -v pyenv 1>/dev/null 2>&1; then

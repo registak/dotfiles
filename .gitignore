@@ -19,27 +19,9 @@
 !/.zshrc
 !/.zsh-alias
 !/.zsh.d
-!/.config
-!/.atom
+!/.config/peco
 !/.tmux.conf
 
 # ignore files or dir form git manegement
 
 /.vim/plugins
-/.atom/compile-cache
-/.atom/storage
-/.atom/packages
-/.atom/.node-gyp
-/.atom/projects.cson
-/.atom/.apm
-/.atom/.npm
-/.atom/blob-store
-/.atom/electron
-/.atom/recovery
-/.config/configstore
-/.config/Fritzing/
-/.config/stetic
-/.config/xbuild
-/.config/NuGet
-/.config/gocode
-/.config/heroku
