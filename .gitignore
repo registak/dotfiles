@@ -7,7 +7,7 @@
 /.*
 
 ##### git manegement #####
-!/Rakefile
+!/install.sh
 !/README.md
 !/.bash_profile
 !/.bashrc
