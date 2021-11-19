@@ -9,6 +9,7 @@
 ##### git manegement #####
 !/install.sh
 !/README.md
+!/.Brewfile
 !/.bash_profile
 !/.bashrc
 !/.vimrc
