@@ -4,8 +4,8 @@
 
 clone this repository
 
-    $ git clone https://github.com/registakm/dotfiles.git ~/.dotfiles
+    $ git clone https://github.com/registak/dotfiles.git ~/.dotfiles
 
-`setup.sh` makes symbolic link
+`install.sh` makes symbolic link
 
-    $ rake symlink -t
+    $ ./install.sh
