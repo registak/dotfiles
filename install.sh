@@ -22,8 +22,8 @@ symlink() {
 # For all files `$name` in the present folder except `*.sh`, `README.md`, `settings.json`,
 # and `config`, backup the target file located at `~/.$name` and symlink `$name` to `~/.$name`
 for name in .??*; do
-  if [ ! -d "$name" ]; then
-    target="$HOME/.$name"
+  if [ ! -e "$name" ]; then
+    target="$HOME/$name"
     if [[ ! "$name" =~ '\.sh$' ]] && [ "$name" != 'README.md' ] && [[ "$name" != 'config' ]]; then
       backup $target
       symlink $PWD/$name $target

@@ -69,24 +69,24 @@ function tmuxkill() {
 # --------------------------------
 # ------- zsh-completions --------
 # --------------------------------
-if [ -e /usr/local/share/zsh-completions ]; then
-  fpath=(/usr/local/share/zsh-completions $fpath)
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+  # activate completion
+  autoload -Uz compinit
+  compinit
 fi
 
-if [ -e ~/.zsh.d/completion ]; then
-  fpath=(~/.zsh.d/completion $fpath)
-fi
 # --------------------------------
 # ---- zsh-syntax-highlighting ---
 # --------------------------------
 if [ -e /usr/local/share/zsh-syntax-highlighting ]; then
-  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 # -------------------------------
 # --- zsh-syntax-highlighting ---
 # -------------------------------
 if [ -e /usr/local/share/zsh-autosuggestions ]; then
-  source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 # --------------------------------
 # ---- peco setting---
@@ -95,13 +95,6 @@ if [[ -f `command -v peco` ]] ; then
   source ~/.zsh.d/peco.zsh
   alias peco='peco --rcfile ~/.config/peco/config.json'
 fi
-
-# --------------------------------
-# --------- COMPLETION -----------
-# --------------------------------
-# activate completion
-autoload -Uz compinit && compinit -i
-zmodload -i zsh/complist
 
 # man zshcontrib
 zstyle ':vcs_info:*' actionformats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
