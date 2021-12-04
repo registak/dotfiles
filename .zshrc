@@ -25,8 +25,8 @@ if [ -d "$HOME/.nodenv" ]; then
   eval "$(nodenv init -)"
 fi
 
-# yarn
-export PATH="$PATH:`yarn global bin`"
+# # yarn
+# export PATH="$PATH:`yarn global bin`"
 
 # golang
 if type go &>/dev/null; then
@@ -70,7 +70,7 @@ function tmuxkill() {
 # ------- zsh-completions --------
 # --------------------------------
 if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
   # activate completion
   autoload -Uz compinit
   compinit
