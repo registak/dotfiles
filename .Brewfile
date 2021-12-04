@@ -53,6 +53,7 @@ cask "bettertouchtool"
 cask "caffeine"
 cask "cleanmymac"
 cask "clipy"
+cask "coteditor"
 cask "daisydisk"
 cask "figma"
 cask "firefox"
@@ -60,20 +61,20 @@ cask "font-fira-code"
 cask "fork"
 cask "go2shell"
 cask "google-chrome"
+cask "google-japanese-ime"
 cask "imageoptim"
 cask "intellij-idea"
 cask "iterm2"
+cask "messenger"
 cask "raindropio"
 cask "slack"
 cask "the-unarchiver"
 cask "tunnelbear"
 cask "visual-studio-code"
 cask "vlc"
+cask "zoom"
 mas "1Password 7", id: 1333542190
 mas "Brother iPrint&Scan", id: 1193539993
-mas "CotEditor", id: 1024640650
-mas "GarageBand", id: 682658836
-mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
 mas "LINE", id: 539883307
 mas "MARKETSPEED", id: 946680495
