@@ -1,5 +1,7 @@
 [core]
-	excludesfile = "$HOME"/.gitignore_global
+	excludesfile = ~/.gitignore_global
+[include]
+    path = ~/.gitconfig.local
 [color]
     ui = auto
     status = auto
@@ -8,8 +10,8 @@
     interactive = auto
     grep = auto
 [pager]
-    log  = diff-highlight | less
-    show = diff-highlight | less
-    diff = diff-highlight | less
+    log  = less
+    show = less
+    diff = less
 [alias]
 	vlog = log --graph --date-order --date=relative --pretty=format:\"%C(cyan)%h: %Cblue - %an - %Cgreen %C(cyan)%ar:%Creset%n%s%n\" --color
