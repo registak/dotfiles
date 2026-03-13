@@ -105,39 +105,12 @@ python3 --version
 
 シェルプロンプトをカスタマイズするツール。設定は `~/.config/starship.toml`。
 
-### 現在の表示内容
+詳細は [starship-guide.md](./starship-guide.md) を参照。
 
 ```
-~/projects/myapp on main ±     ← 左: ディレクトリ + git ブランチ + status
-                    3s node@22 12:30PM  ← 右: 実行時間 + node ver + 時刻
-❯                               ← 入力行（成功=紫、エラー=赤）
-```
-
-### 設定を変更したい場合
-
-```bash
-# 設定ファイルを開く
-vim ~/.config/starship.toml     # → .dotfiles/starship/.config/starship.toml
-
-# 利用可能なモジュール一覧（公式ドキュメント）
-# https://starship.rs/config/
-```
-
-### よくあるカスタマイズ
-
-```toml
-# ディレクトリの表示階層を変える
-[directory]
-truncation_length = 5    # デフォルト3 → 5階層まで表示
-
-# git status の記号を変える
-[git_status]
-modified = "!"
-untracked = "?"
-
-# 新しいモジュールを追加（例: Rust）
-[rust]
-format = "[$symbol($version)]($style) "
+~/.dotfiles on main ⇡1 !2      ← 左: ディレクトリ + git ブランチ + status
+                 3s  22.14.0 12:30PM  ← 右: 実行時間 + node ver + 時刻
+❯                                ← 入力行（成功=紫、エラー=赤）
 ```
 
 ---
