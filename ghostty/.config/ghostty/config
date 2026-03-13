@@ -1,0 +1,24 @@
+# Font
+font-family = "JetBrains Mono"
+font-size = 14
+
+# Theme
+theme = "catppuccin-mocha"
+
+# Window
+window-padding-x = 8
+window-padding-y = 4
+window-decoration = true
+
+# macOS
+macos-option-as-alt = true
+macos-titlebar-style = hidden
+
+# Cursor
+cursor-style = bar
+cursor-style-blink = false
+
+# Misc
+copy-on-select = clipboard
+confirm-close-surface = false
+mouse-hide-while-typing = true

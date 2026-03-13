@@ -1,28 +1,5 @@
-.DS_Store*
+.DS_Store
 *.log
 *.swp
-
-##### ignore all files #####
-/*
-/.*
-
-##### git manegement #####
-!/install.sh
-!/README.md
-!/.Brewfile
-!/.bash_profile
-!/.bashrc
-!/.vimrc
-!/.vim
-!/.gitignore
-!/.gitconfig
-!/.gitmodules
-!/.zshrc
-!/.zsh-alias
-!/.zsh.d
-!/.config/peco
-!/.tmux.conf
-
-# ignore files or dir form git manegement
-
-/.vim/plugins
+.vim/plugins
+ZSH_REBUILD_CONTEXT.md
