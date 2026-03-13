@@ -26,7 +26,7 @@ brew "zoxide"
 # Cask - Apps
 # ============================================================
 cask "appcleaner"
-cask "arc"
+cask "comet"
 cask "bartender"
 cask "bettertouchtool"
 cask "cleanmymac"
