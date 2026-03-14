@@ -31,11 +31,6 @@ alias _="sudo"
 # ===== vim
 alias vi="vim"
 
-# ===== tmux
-alias tat='tmux new-session -As $(basename "$PWD" | tr . -)'
-alias tmuxsrc="tmux source-file ~/.tmux.conf"
-alias tmuxkillall="tmux ls | cut -d : -f 1 | xargs -I {} tmux kill-session -t {}"
-
 # ===== ctag
 alias ctag="ctags -R --exclude=.git --exclude=node_modules"
 
