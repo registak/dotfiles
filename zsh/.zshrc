@@ -106,6 +106,8 @@ zstyle ':completion:*:ssh:*' group-order hosts-domain hosts-host users hosts-ipa
 zstyle '*' single-ignored show
 zstyle ':completion:*' ignore-parents parent pwd ..
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
+
+bindkey '^[[Z' reverse-menu-complete
 zstyle ':completion:*:*:docker:*' option-stacking yes
 zstyle ':completion:*:*:docker-*:*' option-stacking yes
 
@@ -123,14 +125,7 @@ zinit wait lucid light-mode for \
     zsh-users/zsh-completions
 
 # ============================================================
-# 7. tmux
-# ============================================================
-function tmuxopen() { tmux attach -t $1 }
-function tmuxnew()  { tmux new -s $1 }
-function tmuxkill() { tmux kill-session -t $1 }
-
-# ============================================================
-# 8. fzf
+# 7. fzf
 # ============================================================
 source <(fzf --zsh)
 
@@ -173,19 +168,19 @@ zle -N fzf-src
 bindkey '^]' fzf-src
 
 # ============================================================
-# 9. zoxide
+# 8. zoxide
 # ============================================================
 eval "$(zoxide init zsh)"
 
 # ============================================================
-# 10. Aliases
+# 9. Aliases
 # ============================================================
 if [[ -f "${HOME}/.zsh-alias" ]]; then
   source "${HOME}/.zsh-alias"
 fi
 
 # ============================================================
-# 11. External completions
+# 10. External completions
 # ============================================================
 # gcloud
 if [[ -f '/opt/homebrew/share/google-cloud-sdk/completion.zsh.inc' ]]; then
@@ -199,6 +194,6 @@ fi
 alias claude="$HOME/.claude/local/claude"
 
 # ============================================================
-# 12. Starship (must be last)
+# 11. Starship (must be last)
 # ============================================================
 eval "$(starship init zsh)"

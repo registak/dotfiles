@@ -1,6 +1,5 @@
 # ===== suffix alias
 alias -s py=python
-alias -s njs=node
 
 # ===== image file
 if command -v open > /dev/null 2>&1; then
@@ -21,20 +20,32 @@ alias -s html=chrome
 alias ls="eza -a --icons"
 alias ll="eza -la --icons --git"
 alias lt="eza -la --icons --git --tree --level=2"
-alias gs='git status --short --branch'
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
 # ===== sudo
 alias _="sudo"
 
+# ===== git
+alias gs='git status --short --branch'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+alias gd='git diff'
+alias gl='git log --oneline --graph -20'
+alias gco='git checkout'
+alias gb='git branch'
+
 # ===== vim
 alias vi="vim"
 
-# ===== ctag
-alias ctag="ctags -R --exclude=.git --exclude=node_modules"
+# ===== shell
+alias reload='source ~/.zshrc'
+alias mkd='mkdir -p'
+alias cp='cp -i'
+alias mv='mv -i'
 
 # ===== system
-alias myip="ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'"
-
+alias myip='curl -s ifconfig.me'
+alias ports='lsof -i -P -n | grep LISTEN'
 alias grep='grep --color=auto'
