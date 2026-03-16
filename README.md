@@ -25,6 +25,8 @@ cd ~/.dotfiles
 ├── vim/          .vimrc, .vim/
 ├── starship/     .config/starship.toml
 ├── ghostty/      .config/ghostty/config
+├── mise/         .config/mise/config.toml
+├── docs/         設定ガイド
 ├── Brewfile
 ├── install.sh
 └── README.md

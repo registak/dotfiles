@@ -153,7 +153,7 @@ cd ~/somewhere      # 普通の cd はそのまま動く
 cd ~/.dotfiles
 
 # 全パッケージの symlink を作成（install.sh がやっていること）
-stow -t ~ zsh git vim starship ghostty
+stow -t ~ zsh git vim starship ghostty mise
 
 # 特定のパッケージだけ
 stow -t ~ zsh

@@ -1,4 +1,6 @@
 .DS_Store
 *.log
 *.swp
-.vim/plugins
+*.swo
+vim/.vim/plugged/
+vim/.vim/autoload/
