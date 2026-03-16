@@ -26,7 +26,7 @@ setopt interactive_comments
 
 # Changing Directories
 setopt auto_cd
-setopt cdablevarS
+setopt cdablevars
 setopt pushd_ignore_dups
 
 # Expansion and Globbing
@@ -35,17 +35,15 @@ setopt extended_glob
 # Keybinding
 setopt noflowcontrol
 
-# History
-setopt append_history
+# History (share_history implies append/inc_append)
 setopt extended_history
-setopt inc_append_history
+setopt share_history
 setopt hist_expire_dups_first
 setopt hist_ignore_dups
 setopt hist_ignore_space
 setopt hist_find_no_dups
 setopt hist_reduce_blanks
 setopt hist_verify
-setopt share_history
 
 # Completion
 setopt always_to_end
@@ -66,8 +64,8 @@ setopt multios
 # ============================================================
 # 4. History
 # ============================================================
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=50000
+SAVEHIST=50000
 HISTFILE=~/.zsh_history
 
 # ============================================================
@@ -83,33 +81,18 @@ fi
 
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
-
-zstyle ':completion:*' list-colors ''
-zstyle ':completion:*' list-prompt '%SAt %p: Hit TAB for more, or the character to insert%s'
-zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
-zstyle ':completion:*::::' completer _expand _complete _ignored _approximate
-zstyle ':completion:*' menu select=1 _complete _ignored _approximate
+zstyle ':completion:*' completer _expand _complete _ignored _approximate
+zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
+zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*:descriptions' format '%B%d%b'
-zstyle ':completion:*:messages' format '%d'
 zstyle ':completion:*:warnings' format 'No matches for: %d'
-zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
 zstyle ':completion:*' group-name ''
-zstyle ':completion:*:functions' ignored-patterns '_*'
-zstyle ':completion:*:scp:*' tag-order files users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IP\ Address *'
-zstyle ':completion:*:scp:*' group-order files all-files users hosts-domain hosts-host hosts-ipaddr
-zstyle ':completion:*:ssh:*' tag-order users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IP\ Address *'
-zstyle ':completion:*:ssh:*' group-order hosts-domain hosts-host users hosts-ipaddr
-zstyle '*' single-ignored show
-zstyle ':completion:*' ignore-parents parent pwd ..
-zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
-
-bindkey '^[[Z' reverse-menu-complete
 zstyle ':completion:*:*:docker:*' option-stacking yes
 zstyle ':completion:*:*:docker-*:*' option-stacking yes
+
+bindkey '^[[Z' reverse-menu-complete
 
 # ============================================================
 # 6. Zinit Plugins (Turbo Mode)
@@ -157,7 +140,7 @@ bindkey '^S' fzf-ssh
 
 # Ctrl+]: ghq リポジトリ (fzf で選択)
 function fzf-src() {
-  local selected=$(ghq list --full-path | fzf --preview 'ls -la {}')
+  local selected=$(ghq list --full-path | fzf --preview 'eza -la --icons --git {}')
   if [[ -n "$selected" ]]; then
     BUFFER="cd ${selected}"
     zle accept-line
