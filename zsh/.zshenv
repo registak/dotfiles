@@ -1,4 +1,5 @@
 export LANG=ja_JP.UTF-8
+typeset -U path
 
 # Homebrew (eval 不要、直接展開で高速)
 export HOMEBREW_PREFIX="/opt/homebrew"
@@ -24,3 +25,6 @@ fi
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# local bin
+export PATH="$HOME/.local/bin:$PATH"

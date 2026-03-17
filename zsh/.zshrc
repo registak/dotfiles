@@ -173,8 +173,6 @@ fi
 # bun
 [[ -s "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
 
-# claude
-alias claude="$HOME/.claude/local/claude"
 
 # ============================================================
 # 11. Starship (must be last)
