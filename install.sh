@@ -33,4 +33,14 @@ stow -v -t "$HOME" zsh git vim starship ghostty mise
 echo "📦 Installing packages..."
 brew bundle --file="$DOTFILES_DIR/Brewfile"
 
+# ============================================================
+# 5. VS Code Extensions
+# ============================================================
+if command -v code &>/dev/null; then
+  echo "🧩 Installing VS Code extensions..."
+  while IFS= read -r ext; do
+    code --install-extension "$ext" --force
+  done < "$DOTFILES_DIR/vscode/extensions.txt"
+fi
+
 echo "👌 Done!"
