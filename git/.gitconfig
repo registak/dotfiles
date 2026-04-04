@@ -18,5 +18,14 @@
     conflictstyle = zdiff3
 [rerere]
     enabled = true
+[column]
+    ui = auto
+[branch]
+    sort = -committerdate
+[rebase]
+    autoSquash = true
+    autoStash = true
+[transfer]
+    fsckObjects = true
 [alias]
     vlog = log --graph --oneline --decorate -20

@@ -110,6 +110,12 @@ zinit wait lucid light-mode for \
 # ============================================================
 # 7. fzf
 # ============================================================
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=numbers --line-range=:500 {}'"
+export FZF_ALT_C_COMMAND='fd --type d --hidden --exclude .git'
+export FZF_ALT_C_OPTS="--preview 'eza -la --icons {}'"
+
 source <(fzf --zsh)
 
 # Ctrl+G: git add 対象を fzf で選択（差分プレビュー付き）
@@ -151,9 +157,14 @@ zle -N fzf-src
 bindkey '^]' fzf-src
 
 # ============================================================
-# 8. zoxide
+# 8. zoxide (キャッシュ化、バイナリ更新時に再生成)
 # ============================================================
-eval "$(zoxide init zsh)"
+_zoxide_cache="$HOME/.cache/zsh/zoxide-init.zsh"
+if [[ ! -f "$_zoxide_cache" || "$(which zoxide)" -nt "$_zoxide_cache" ]]; then
+  mkdir -p "${_zoxide_cache:h}"
+  zoxide init zsh > "$_zoxide_cache"
+fi
+source "$_zoxide_cache"
 
 # ============================================================
 # 9. Aliases
@@ -175,6 +186,11 @@ fi
 
 
 # ============================================================
-# 11. Starship (must be last)
+# 11. Starship (キャッシュ化、must be last)
 # ============================================================
-eval "$(starship init zsh)"
+_starship_cache="$HOME/.cache/zsh/starship-init.zsh"
+if [[ ! -f "$_starship_cache" || "$(which starship)" -nt "$_starship_cache" ]]; then
+  mkdir -p "${_starship_cache:h}"
+  starship init zsh > "$_starship_cache"
+fi
+source "$_starship_cache"

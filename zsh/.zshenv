@@ -12,12 +12,6 @@ export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}"
 # mise (shims PATH のみ、eval 不要)
 export PATH="$HOME/.local/share/mise/shims:$PATH"
 
-# golang
-if [ -d "$HOME/golang" ]; then
-  export GOPATH="$HOME/golang"
-  export PATH="$GOPATH/bin:$PATH"
-fi
-
 # Google Cloud SDK
 [ -f '/opt/homebrew/share/google-cloud-sdk/path.zsh.inc' ] && \
   . '/opt/homebrew/share/google-cloud-sdk/path.zsh.inc'
