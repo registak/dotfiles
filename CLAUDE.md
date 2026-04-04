@@ -11,12 +11,13 @@ vim/       .vimrc, .vim/
 starship/  .config/starship.toml
 ghostty/   .config/ghostty/config
 mise/      .config/mise/config.toml
+claude/    .claude/（Claude Code 用）
 ```
 
 ## Stow
 
 ```bash
-cd ~/.dotfiles && stow -t ~ zsh git vim starship ghostty mise
+cd ~/.dotfiles && stow --no-folding -t ~ zsh git vim starship ghostty mise claude
 ```
 
 新しいファイルを追加した場合は対応パッケージに配置して `stow` を再実行する。

@@ -40,7 +40,7 @@ alias gb='git branch'
 alias vi="vim"
 
 # ===== shell
-alias reload='source ~/.zshrc'
+alias reload='source ~/.zshrc'  # PATH 等は source ~/.zshenv か exec zsh
 alias mkd='mkdir -p'
 alias cp='cp -i'
 alias mv='mv -i'

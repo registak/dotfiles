@@ -112,7 +112,7 @@ zinit wait lucid light-mode for \
 # ============================================================
 source <(fzf --zsh)
 
-# Ctrl+G Ctrl+A: git add (fzf で選択)
+# Ctrl+G: git add 対象を fzf で選択（差分プレビュー付き）
 function fzf-git-add() {
   local selected=$(git status --porcelain | \
     fzf --multi --preview 'git diff --color=always {2}' | \

@@ -25,7 +25,7 @@ fi
 # ============================================================
 echo "🔗 Creating symlinks..."
 cd "$DOTFILES_DIR"
-stow -v -t "$HOME" zsh git vim starship ghostty mise
+stow -v -t "$HOME" zsh git vim starship ghostty mise claude
 
 # ============================================================
 # 4. Packages
@@ -34,7 +34,15 @@ echo "📦 Installing packages..."
 brew bundle --file="$DOTFILES_DIR/Brewfile"
 
 # ============================================================
-# 5. VS Code Extensions
+# 5. mise（config.toml のランタイムをインストール）
+# ============================================================
+if command -v mise &>/dev/null; then
+  echo "🔧 Installing mise tools..."
+  mise install
+fi
+
+# ============================================================
+# 6. VS Code Extensions
 # ============================================================
 if command -v code &>/dev/null; then
   echo "🧩 Installing VS Code extensions..."
@@ -44,3 +52,4 @@ if command -v code &>/dev/null; then
 fi
 
 echo "👌 Done!"
+echo "    初回のみ: ~/.gitconfig.local / ~/.gitignore_global を用意（*.example をコピーして編集）"
