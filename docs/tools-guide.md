@@ -23,14 +23,95 @@ eza --sort=modified     # 更新日順
 
 ---
 
+## bat — cat の代替
+
+シンタックスハイライト付きでファイルを表示する。fzf のプレビューにも使用。
+
+```bash
+# 基本
+bat file.py              # ハイライト付き表示
+bat -n file.py           # 行番号のみ（ヘッダーなし）
+bat -p file.py           # プレーン表示（ページャーなし）
+
+# 複数ファイル
+bat src/*.ts
+
+# diff と組み合わせ
+git diff | bat
+```
+
+- `Ctrl+T`（fzf ファイル検索）のプレビューに自動で使われる
+
+---
+
+## fd — find の代替
+
+高速なファイル検索。`.gitignore` を自動で尊重する。fzf のデフォルト検索エンジンとして使用。
+
+```bash
+# 基本
+fd pattern               # カレント以下を検索
+fd pattern src/          # src/ 以下を検索
+
+# 拡張子で絞り込み
+fd -e ts                 # .ts ファイルのみ
+fd -e py -e js           # .py と .js
+
+# ディレクトリのみ / ファイルのみ
+fd -t d pattern
+fd -t f pattern
+
+# 隠しファイルも含める
+fd -H pattern
+
+# 結果に対してコマンド実行
+fd -e log -x rm          # .log ファイルを削除
+```
+
+- `Ctrl+T`（fzf ファイル検索）、`Alt+C`（fzf ディレクトリ移動）で自動で使われる
+
+---
+
+## ripgrep (rg) — grep の代替
+
+超高速な全文検索。`.gitignore` を自動で尊重する。
+
+```bash
+# 基本
+rg pattern               # カレント以下を再帰検索
+rg pattern src/          # src/ 以下を検索
+
+# ファイルタイプで絞り込み
+rg -t py pattern         # Python ファイルのみ
+rg -t ts pattern         # TypeScript ファイルのみ
+
+# 大文字小文字を無視
+rg -i pattern
+
+# ファイル名のみ表示
+rg -l pattern
+
+# 固定文字列（正規表現を無効化）
+rg -F 'console.log('
+
+# 置換プレビュー
+rg pattern --replace replacement
+```
+
+---
+
 ## fzf — あいまい検索
 
 リストから対話的に絞り込み選択するツール。パイプで何でも検索できる。
+
+fd（ファイル検索）と bat（プレビュー）を組み合わせて使用（`.zshrc` で設定済み）。
 
 ### キーバインド（.zshrc で設定済み）
 
 | キー | 動作 |
 |------|------|
+| `Ctrl+T` | ファイル検索（fd + bat プレビュー） |
+| `Alt+C` | ディレクトリ移動（fd + eza プレビュー） |
 | `Ctrl+R` | コマンド履歴を検索（fzf 組み込み） |
 | `Ctrl+G` | git add するファイルを選択（差分プレビュー付き） |
 | `Ctrl+S` | SSH 先を選択して接続 |
@@ -47,7 +128,7 @@ ps aux | fzf
 git branch | fzf
 
 # プレビュー付き
-fzf --preview 'cat {}'
+fzf --preview 'bat --color=always {}'
 
 # 複数選択（Tab で選択、Enter で確定）
 git status -s | fzf --multi
@@ -153,10 +234,10 @@ cd ~/somewhere      # 普通の cd はそのまま動く
 cd ~/.dotfiles
 
 # 全パッケージの symlink を作成（install.sh がやっていること）
-stow -t ~ zsh git vim starship ghostty mise
+stow --no-folding -t ~ zsh git vim starship ghostty mise claude
 
 # 特定のパッケージだけ
-stow -t ~ zsh
+stow --no-folding -t ~ zsh
 
 # symlink を削除
 stow -t ~ -D zsh

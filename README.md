@@ -39,6 +39,7 @@ cd ~/.dotfiles
 ├── ghostty/      .config/ghostty/config
 ├── mise/         .config/mise/config.toml
 ├── claude/       .claude/（Claude Code 用グローバル設定）
+├── vscode/       extensions.txt（VS Code 拡張一覧）
 ├── docs/         設定ガイド
 ├── Brewfile
 ├── install.sh
