@@ -35,7 +35,6 @@ cask "caffeine"
 cask "cleanmymac"
 cask "cmux"
 cask "comet"
-cask "coteditor"
 cask "figma"
 cask "firefox"
 cask "fork"
@@ -62,7 +61,6 @@ cask "zoom"
 # ============================================================
 # Cask - Fonts
 # ============================================================
-cask "font-fira-code"
 cask "font-jetbrains-mono-nerd-font"
 
 # ============================================================
