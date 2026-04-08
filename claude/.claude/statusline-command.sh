@@ -4,14 +4,20 @@
 input=$(cat)
 
 # ---------------------------------------------------------------------------
-# ANSI color codes
+# ANSI color codes (catppuccin mocha palette to match Starship theme)
 # ---------------------------------------------------------------------------
 C_RESET='\033[0m'
-C_GREEN='\033[32m'
-C_YELLOW='\033[33m'
-C_RED='\033[31m'
-C_CYAN='\033[36m'
 C_DIM='\033[2m'
+# catppuccin mocha: green=#a6e3a1, yellow=#f9e2af, red=#f38ba8
+# peach=#fab387, blue=#89b4fa, lavender=#b4befe, mauve=#cba6f7, teal=#94e2d5
+C_GREEN='\033[38;2;166;227;161m'    # green
+C_YELLOW='\033[38;2;249;226;175m'   # yellow
+C_RED='\033[38;2;243;139;168m'      # red
+C_PEACH='\033[38;2;250;179;135m'    # peach (directory / cwd)
+C_BLUE='\033[38;2;137;180;250m'     # blue (git branch)
+C_MAUVE='\033[38;2;203;166;247m'    # mauve (git status)
+C_LAVENDER='\033[38;2;180;190;254m' # lavender (model)
+C_TEAL='\033[38;2;148;226;213m'     # teal (accents)
 
 # ---------------------------------------------------------------------------
 # Color picker: green < 50%, yellow 50-80%, red > 80%
@@ -35,8 +41,10 @@ pct_color() {
 model_name=$(echo "$input" | jq -r '.model.display_name // empty')
 model_display=""
 if [[ -n "$model_name" ]]; then
-    model_display="${model_name#Claude }"
-    model_display="${model_display%% (*}"
+    short="${model_name#Claude }"
+    short="${short%% (*}"
+    model_icon=$(printf '\xef\x83\xa7')
+    model_display="${C_LAVENDER}${model_icon} ${short}${C_RESET}"
 fi
 
 # ---------------------------------------------------------------------------
@@ -65,26 +73,33 @@ make_bar() {
 cwd=$(echo "$input" | jq -r '.cwd // empty')
 cwd_display=""
 if [[ -n "$cwd" ]]; then
-    cwd_display="${cwd/#$HOME/~}"
+    cwd_icon=$(printf '\xef\x81\xbb')
+    cwd_display="${C_PEACH}${cwd_icon} ${cwd/#$HOME/~}${C_RESET}"
 fi
 
 # ---------------------------------------------------------------------------
-# Session duration
+# Git branch (worktree branch or current branch from cwd)
 # ---------------------------------------------------------------------------
-duration_ms=$(echo "$input" | jq -r '.cost.total_duration_ms // empty')
-duration_display=""
-if [[ -n "$duration_ms" ]]; then
-    total_sec=$(( duration_ms / 1000 ))
-    if (( total_sec >= 3600 )); then
-        d_h=$(( total_sec / 3600 ))
-        d_m=$(( (total_sec % 3600) / 60 ))
-        duration_display="${d_h}h${d_m}m"
-    elif (( total_sec >= 60 )); then
-        d_m=$(( total_sec / 60 ))
-        d_s=$(( total_sec % 60 ))
-        duration_display="${d_m}m${d_s}s"
+git_branch=$(echo "$input" | jq -r '.worktree.branch // empty')
+if [[ -z "$git_branch" && -n "$cwd" ]]; then
+    git_branch=$(git -C "$cwd" rev-parse --abbrev-ref HEAD 2>/dev/null)
+fi
+branch_display=""
+if [[ -n "$git_branch" ]]; then
+    git_icon=$(printf '\xee\x82\xa0')
+    branch_display="${C_BLUE}${git_icon} ${git_branch}${C_RESET}"
+fi
+
+# ---------------------------------------------------------------------------
+# Vim mode (if vim mode is active)
+# ---------------------------------------------------------------------------
+vim_mode=$(echo "$input" | jq -r '.vim.mode // empty')
+vim_display=""
+if [[ -n "$vim_mode" ]]; then
+    if [[ "$vim_mode" == "INSERT" ]]; then
+        vim_display="${C_GREEN}INSERT${C_RESET}"
     else
-        duration_display="${total_sec}s"
+        vim_display="${C_MAUVE}NORMAL${C_RESET}"
     fi
 fi
 
@@ -107,7 +122,7 @@ if [[ -n "$five_pct" ]]; then
         if (( remaining_sec > 0 )); then
             rm_h=$(( remaining_sec / 3600 ))
             rm_m=$(( (remaining_sec % 3600) / 60 ))
-            reset_part="($(printf '%d:%02d' "$rm_h" "$rm_m"))"
+            reset_part="${C_DIM}($(printf '%d:%02d' "$rm_h" "$rm_m"))${C_RESET}"
         fi
     fi
     five_display="5h:${five_color}${five_filled}${C_RESET}${C_DIM}${five_empty}${C_RESET} ${five_int}%${reset_part}"
@@ -142,25 +157,6 @@ if [[ -n "$ctx_pct" ]]; then
 fi
 
 # ---------------------------------------------------------------------------
-# Lines added/removed
-# ---------------------------------------------------------------------------
-lines_added=$(echo "$input" | jq -r '.cost.total_lines_added // empty')
-lines_removed=$(echo "$input" | jq -r '.cost.total_lines_removed // empty')
-lines_display=""
-if [[ -n "$lines_added" && -n "$lines_removed" ]]; then
-    lines_display="${C_GREEN}+${lines_added}${C_RESET}/${C_RED}-${lines_removed}${C_RESET}"
-fi
-
-# ---------------------------------------------------------------------------
-# Cost (API / Team plan)
-# ---------------------------------------------------------------------------
-cost_usd=$(echo "$input" | jq -r '.cost.total_cost_usd // empty')
-cost_display=""
-if [[ -n "$cost_usd" ]]; then
-    cost_display="\$$(printf '%.2f' "$cost_usd")"
-fi
-
-# ---------------------------------------------------------------------------
 # Resume command from session_id
 # ---------------------------------------------------------------------------
 session_id=$(echo "$input" | jq -r '.session_id // empty')
@@ -170,10 +166,10 @@ if [[ -n "$session_id" ]]; then
 fi
 
 # ---------------------------------------------------------------------------
-# Build status line (4 rows)
-# Row 1: model | ctx | cost
-# Row 2: 5h | 7d
-# Row 3: cwd | duration | lines
+# Build status line (up to 4 rows)
+# Row 1: model | ctx
+# Row 2: 5h | 7d  (only when rate limits are available)
+# Row 3: cwd [branch] [vim mode]
 # Row 4: resume
 # ---------------------------------------------------------------------------
 join_parts() {
@@ -189,22 +185,21 @@ join_parts() {
 row1_parts=()
 [[ -n "$model_display" ]] && row1_parts+=("$model_display")
 [[ -n "$ctx_display" ]]   && row1_parts+=("$ctx_display")
-[[ -n "$cost_display" ]]  && row1_parts+=("$cost_display")
 
 row2_parts=()
 [[ -n "$five_display" ]]  && row2_parts+=("$five_display")
 [[ -n "$seven_display" ]] && row2_parts+=("$seven_display")
 
 row3_parts=()
-[[ -n "$cwd_display" ]]      && row3_parts+=("${C_CYAN}${cwd_display}${C_RESET}")
-[[ -n "$duration_display" ]] && row3_parts+=("${C_DIM}${duration_display}${C_RESET}")
-[[ -n "$lines_display" ]]    && row3_parts+=("$lines_display")
+[[ -n "$cwd_display" ]]       && row3_parts+=("$cwd_display")
+[[ -n "$branch_display" ]]    && row3_parts+=("$branch_display")
+[[ -n "$vim_display" ]]       && row3_parts+=("$vim_display")
 
 row1=$(join_parts "${row1_parts[@]}")
 row2=$(join_parts "${row2_parts[@]}")
 row3=$(join_parts "${row3_parts[@]}")
 
-[[ -n "$row1" ]] && echo -e "$row1"
-[[ -n "$row2" ]] && echo -e "$row2"
-[[ -n "$row3" ]] && echo -e "$row3"
-[[ -n "$resume_display" ]] && echo -e "$resume_display"
+[[ -n "$row1" ]] && printf "%b\n" "$row1"
+[[ -n "$row2" ]] && printf "%b\n" "$row2"
+[[ -n "$row3" ]] && printf "%b\n" "$row3"
+[[ -n "$resume_display" ]] && printf "%b\n" "$resume_display"
