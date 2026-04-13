@@ -25,7 +25,7 @@ fi
 # ============================================================
 echo "🔗 Creating symlinks..."
 cd "$DOTFILES_DIR"
-stow -v -t "$HOME" zsh git vim starship ghostty mise claude
+stow -v --no-folding -t "$HOME" zsh git vim starship ghostty mise claude
 
 # ============================================================
 # 4. Packages

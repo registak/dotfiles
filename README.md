@@ -24,6 +24,7 @@ cd ~/.dotfiles
 
 ### 日常コマンド（Makefile）
 
+- `make install` — install.sh をフル実行
 - `make stow` — シンボリックリンクを更新
 - `make brew` — Brewfile を反映
 - `make mise-install` — mise ツールをインストール
@@ -38,9 +39,9 @@ cd ~/.dotfiles
 ├── starship/     .config/starship.toml
 ├── ghostty/      .config/ghostty/config
 ├── mise/         .config/mise/config.toml
-├── claude/       .claude/（Claude Code 用グローバル設定）
-├── vscode/       extensions.txt（VS Code 拡張一覧）
-├── docs/         設定ガイド
+├── claude/       .claude/（CLAUDE.md, statusline-command.sh）
+├── vscode/       extensions.txt（stow 対象外、code CLI で管理）
+├── docs/         ghostty / starship / eval-cache / tools ガイド
 ├── Brewfile
 ├── install.sh
 ├── Makefile
