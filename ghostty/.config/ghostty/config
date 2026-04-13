@@ -31,7 +31,7 @@ clipboard-read = ask
 clipboard-paste-protection = true
 
 # Scrollback
-scrollback-limit = 10000
+scrollback-limit = 100000
 
 # Quick Terminal
 keybind = global:super+grave_accent=toggle_quick_terminal
