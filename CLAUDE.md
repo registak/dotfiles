@@ -12,12 +12,13 @@ starship/  .config/starship.toml
 ghostty/   .config/ghostty/config
 mise/      .config/mise/config.toml
 claude/    .claude/（Claude Code 用）
+glow/      Library/Preferences/glow/（glow 設定）
 ```
 
 ## Stow
 
 ```bash
-cd ~/.dotfiles && stow --no-folding -t ~ zsh git vim starship ghostty mise claude
+cd ~/.dotfiles && stow --no-folding -t ~ zsh git vim starship ghostty mise claude glow
 ```
 
 新しいファイルを追加した場合は対応パッケージに配置して `stow` を再実行する。
@@ -39,7 +40,7 @@ cd ~/.dotfiles && stow --no-folding -t ~ zsh git vim starship ghostty mise claud
 
 ## テーマ
 
-catppuccin-mocha で統一（Ghostty, Starship, Vim, lightline）
+catppuccin-mocha で統一（Ghostty, Starship, Vim, lightline）、glow は tokyo-night
 
 ## Git
 
