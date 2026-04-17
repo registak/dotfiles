@@ -4,12 +4,16 @@ palette = "catppuccin_mocha"
 add_newline = true
 
 format = """
+$container\
 $directory\
 $git_branch\
 $git_status\
+$git_state\
 $character"""
 
 right_format = """
+$status\
+$jobs\
 $cmd_duration\
 $nodejs\
 $python\
@@ -23,6 +27,7 @@ error_symbol = "[❯](red)"
 style = "bold peach"
 truncation_length = 3
 truncate_to_repo = true
+truncation_symbol = "…/"
 repo_root_style = "bold peach"
 repo_root_format = "[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style) "
 
@@ -38,7 +43,7 @@ ahead = "⇡${count}"
 behind = "⇣${count}"
 diverged = "⇕⇡${ahead_count}⇣${behind_count}"
 untracked = "?${count}"
-stashed = "📦"
+stashed = '\$'
 modified = "!${count}"
 staged = "+${count}"
 deleted = "✘${count}"
@@ -54,12 +59,32 @@ min_time_to_notify = 30_000
 format = "[$symbol($version)]($style) "
 symbol = " "
 style = "green"
-detect_files = ["package.json"]
 
 [python]
-format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+format = '[${symbol}(${version} )(\($virtualenv\) )]($style)'
 symbol = " "
 style = "yellow"
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bold maroon"
+
+[status]
+disabled = false
+format = '[$symbol$status]($style) '
+symbol = "✘ "
+success_symbol = ""
+style = "bold red"
+
+[jobs]
+format = '[$symbol$number]($style) '
+symbol = "✦ "
+style = "bold teal"
+
+[container]
+format = '[$symbol \[$name\]]($style) '
+symbol = "⬢"
+style = "bold sapphire"
 
 [time]
 disabled = false
