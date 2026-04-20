@@ -1,2 +1,16 @@
-*~
+# macOS
 .DS_Store
+._*
+
+# Editor backups / swaps
+*~
+*.swp
+*.swo
+
+# Secrets / local env (最後の防衛線: プロジェクト側の gitignore 漏れを救う)
+.env
+.env.local
+.env.*.local
+
+# Claude Code personal overrides
+.claude/settings.local.json
