@@ -234,7 +234,7 @@ cd ~/somewhere      # 普通の cd はそのまま動く
 cd ~/.dotfiles
 
 # 全パッケージの symlink を作成（install.sh がやっていること）
-stow --no-folding -t ~ zsh git vim starship ghostty mise claude
+stow --no-folding -t ~ zsh git vim starship ghostty mise claude glow
 
 # 特定のパッケージだけ
 stow --no-folding -t ~ zsh

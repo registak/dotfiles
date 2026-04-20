@@ -1,5 +1,5 @@
 # dotfiles — よく使うコマンド
-STOW_PACKAGES := zsh git vim starship ghostty mise claude
+STOW_PACKAGES := zsh git vim starship ghostty mise claude glow
 DOTFILES_DIR := $(abspath .)
 
 .PHONY: stow brew mise-install install

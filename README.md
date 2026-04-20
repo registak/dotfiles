@@ -13,10 +13,17 @@ cd ~/.dotfiles
 `install.sh` は以下を実行します：
 
 1. Homebrew のインストール（未導入の場合）
-2. `stow` で各設定のシンボリックリンクを作成（`zsh` / `git` / `vim` / `starship` / `ghostty` / `mise` / `claude`）
-3. `brew bundle` でパッケージ・アプリを一括インストール
-4. `mise install` で [mise/.config/mise/config.toml](mise/.config/mise/config.toml) のランタイムを入れる
-5. VS Code 拡張の一括インストール（`code` がある場合）
+2. `stow` で各設定のシンボリックリンクを作成（`zsh` / `git` / `vim` / `starship` / `ghostty` / `mise` / `claude` / `glow`）
+3. `~/.gitconfig.local` / `~/.gitignore_global` を `*.example` から初期化（未存在時のみ）
+4. `brew bundle` でパッケージ・アプリを一括インストール
+5. `mise install` で [mise/.config/mise/config.toml](mise/.config/mise/config.toml) のランタイムを入れる
+6. [Claude Code](https://code.claude.com/) を native install（未導入時のみ、以降バックグラウンド自動更新）
+7. VS Code 拡張の一括インストール（`code` がある場合）
+
+セットアップ完了後にやること:
+
+- `~/.gitconfig.local` を編集して `name` / `email` を自分の情報に置き換える
+- `claude` を起動して `/login` で認証
 
 ### Stow の衝突時
 
@@ -40,8 +47,11 @@ cd ~/.dotfiles
 ├── ghostty/      .config/ghostty/config
 ├── mise/         .config/mise/config.toml
 ├── claude/       .claude/（CLAUDE.md, statusline-command.sh）
+├── glow/         Library/Preferences/glow/（glow 設定）
 ├── vscode/       extensions.txt（stow 対象外、code CLI で管理）
 ├── docs/         ghostty / starship / eval-cache / tools ガイド
+├── .gitconfig.local.example      個人情報（name / email）の雛形
+├── .gitignore_global.example     グローバル除外リストの雛形
 ├── Brewfile
 ├── install.sh
 ├── Makefile

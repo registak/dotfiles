@@ -3,6 +3,7 @@
 # ============================================================
 brew "awscli"
 brew "bat"
+brew "bun"
 brew "curl"
 brew "eza"
 brew "fd"

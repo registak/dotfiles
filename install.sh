@@ -28,13 +28,26 @@ cd "$DOTFILES_DIR"
 stow -v --no-folding -t "$HOME" zsh git vim starship ghostty mise claude glow
 
 # ============================================================
-# 4. Packages
+# 4. Local config templates (初回のみ)
+# ============================================================
+if [ ! -f "$HOME/.gitconfig.local" ]; then
+  echo "📝 Creating ~/.gitconfig.local from template..."
+  cp "$DOTFILES_DIR/.gitconfig.local.example" "$HOME/.gitconfig.local"
+  echo "    ⚠️  ~/.gitconfig.local を編集して name / email を設定してください"
+fi
+if [ ! -f "$HOME/.gitignore_global" ]; then
+  echo "📝 Creating ~/.gitignore_global from template..."
+  cp "$DOTFILES_DIR/.gitignore_global.example" "$HOME/.gitignore_global"
+fi
+
+# ============================================================
+# 5. Packages
 # ============================================================
 echo "📦 Installing packages..."
 brew bundle --file="$DOTFILES_DIR/Brewfile"
 
 # ============================================================
-# 5. mise（config.toml のランタイムをインストール）
+# 6. mise（config.toml のランタイムをインストール）
 # ============================================================
 if command -v mise &>/dev/null; then
   echo "🔧 Installing mise tools..."
@@ -42,7 +55,15 @@ if command -v mise &>/dev/null; then
 fi
 
 # ============================================================
-# 6. VS Code Extensions
+# 7. Claude Code (native install、バックグラウンド自動更新)
+# ============================================================
+if ! command -v claude &>/dev/null; then
+  echo "🤖 Installing Claude Code..."
+  curl -fsSL https://claude.ai/install.sh | bash
+fi
+
+# ============================================================
+# 8. VS Code Extensions
 # ============================================================
 if command -v code &>/dev/null; then
   echo "🧩 Installing VS Code extensions..."
@@ -52,4 +73,6 @@ if command -v code &>/dev/null; then
 fi
 
 echo "👌 Done!"
-echo "    初回のみ: ~/.gitconfig.local / ~/.gitignore_global を用意（*.example をコピーして編集）"
+echo "    次の手順:"
+echo "    1. ~/.gitconfig.local を編集して name / email を設定"
+echo "    2. Claude Code: claude コマンドで初回ログイン (/login)"

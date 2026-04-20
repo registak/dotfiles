@@ -118,7 +118,7 @@ clipboard-paste-protection = true
 ### Scrollback — スクロールバック
 
 ```
-scrollback-limit = 10000
+scrollback-limit = 100000
 ```
 
 ターミナルの出力履歴をどこまで遡れるかの設定。ログを大量に流す作業では多めに設定すると便利。

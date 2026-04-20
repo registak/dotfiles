@@ -13,12 +13,15 @@ ghostty/   .config/ghostty/config
 mise/      .config/mise/config.toml
 claude/    .claude/（Claude Code 用）
 glow/      Library/Preferences/glow/（glow 設定）
+vscode/    extensions.txt（stow 対象外、code CLI で管理）
+docs/      各ツールのガイド
 ```
 
 ## Stow
 
 ```bash
 cd ~/.dotfiles && stow --no-folding -t ~ zsh git vim starship ghostty mise claude glow
+# vscode は stow 対象外。extensions は install.sh が `code --install-extension` で入れる
 ```
 
 新しいファイルを追加した場合は対応パッケージに配置して `stow` を再実行する。
@@ -61,6 +64,11 @@ catppuccin-mocha で統一（Ghostty, Starship, Vim, lightline）、glow は tok
 - `Ctrl+G` — git add 対象を選択（差分プレビュー付き）
 - `Ctrl+S` — SSH 先を選択
 - `Ctrl+]` — ghq リポジトリを選択して cd
+
+## 初期セットアップ
+
+- `~/.gitconfig.local` / `~/.gitignore_global` はリポジトリ直下の `*.example` から install.sh が初期化する（未存在時のみ）
+- Claude Code は install.sh が native install で導入する（公式推奨、バックグラウンド自動更新あり）。Brewfile には含めない
 
 ## ルール
 
