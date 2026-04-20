@@ -28,6 +28,7 @@ brew "zoxide"
 # ============================================================
 # Cask - Apps
 # ============================================================
+cask "1password"
 cask "appcleaner"
 cask "bartender"
 cask "bettertouchtool"
