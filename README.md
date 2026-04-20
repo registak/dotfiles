@@ -4,6 +4,14 @@ GNU Stow で管理する dotfiles。
 
 ## Setup
 
+### Xcode Command Line Tools が未インストールの場合
+
+```bash
+xcode-select --install
+```
+
+### インストール
+
 ```bash
 git clone https://github.com/registak/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
