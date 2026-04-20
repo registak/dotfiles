@@ -66,5 +66,4 @@ cask "font-jetbrains-mono-nerd-font"
 # Mac App Store
 # ============================================================
 mas "LINE", id: 539883307
-mas "Xcode", id: 497799835
 
