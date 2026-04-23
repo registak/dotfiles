@@ -159,12 +159,14 @@ bindkey '^]' fzf-src
 # ============================================================
 # 8. zoxide (キャッシュ化、バイナリ更新時に再生成)
 # ============================================================
-_zoxide_cache="$HOME/.cache/zsh/zoxide-init.zsh"
-if [[ ! -f "$_zoxide_cache" || "$(which zoxide)" -nt "$_zoxide_cache" ]]; then
-  mkdir -p "${_zoxide_cache:h}"
-  zoxide init zsh > "$_zoxide_cache"
+if (( $+commands[zoxide] )); then
+  _zoxide_cache="$HOME/.cache/zsh/zoxide-init.zsh"
+  if [[ ! -s "$_zoxide_cache" || "$commands[zoxide]" -nt "$_zoxide_cache" ]]; then
+    mkdir -p "${_zoxide_cache:h}"
+    zoxide init zsh > "$_zoxide_cache"
+  fi
+  source "$_zoxide_cache"
 fi
-source "$_zoxide_cache"
 
 # ============================================================
 # 9. Aliases
@@ -188,9 +190,11 @@ fi
 # ============================================================
 # 11. Starship (キャッシュ化、must be last)
 # ============================================================
-_starship_cache="$HOME/.cache/zsh/starship-init.zsh"
-if [[ ! -f "$_starship_cache" || "$(which starship)" -nt "$_starship_cache" ]]; then
-  mkdir -p "${_starship_cache:h}"
-  starship init zsh > "$_starship_cache"
+if (( $+commands[starship] )); then
+  _starship_cache="$HOME/.cache/zsh/starship-init.zsh"
+  if [[ ! -s "$_starship_cache" || "$commands[starship]" -nt "$_starship_cache" ]]; then
+    mkdir -p "${_starship_cache:h}"
+    starship init zsh > "$_starship_cache"
+  fi
+  source "$_starship_cache"
 fi
-source "$_starship_cache"
