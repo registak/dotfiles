@@ -29,3 +29,6 @@
     fsckObjects = true
 [alias]
     vlog = log --graph --oneline --decorate -20
+[user]
+	name = registak
+	email = kazuki.murayama@themosh.jp
