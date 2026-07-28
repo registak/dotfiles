@@ -9,6 +9,7 @@
       "mcp__notion__notion-search",
       "mcp__notion__notion-query-meeting-notes",
       "mcp__notion__notion-query-database-view",
+      "mcp__notion__notion-query-data-sources",
       "mcp__slack__slack_search_public_and_private",
       "mcp__slack__slack_search_channels",
       "mcp__slack__slack_search_users",
