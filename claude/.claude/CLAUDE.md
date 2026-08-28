@@ -22,6 +22,7 @@
 - 実装を伴うAgentはworktreeで分離する（`isolation: "worktree"`）
 - コミットメッセージはConventional Commits形式
 - コミットはCIがパスする最小の動作単位で切る
+- コミット前に `/comment-cleanup` を実行し、差分のコメントを `~/.claude/rules/comments.md` に照らして刈る
 - Issue・PR作成時はリポジトリのテンプレートがあれば使う
 - テスト・lintが存在する変更は、それらがパスする状態で報告する
 

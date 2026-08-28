@@ -54,7 +54,7 @@ cd ~/.dotfiles
 ├── starship/     .config/starship.toml
 ├── ghostty/      .config/ghostty/config
 ├── mise/         .config/mise/config.toml
-├── claude/       .claude/（CLAUDE.md, statusline-command.sh）
+├── claude/       .claude/（CLAUDE.md, settings.json, rules/, statusline-command.sh）
 ├── glow/         Library/Preferences/glow/（glow 設定）
 ├── vscode/       extensions.txt（stow 対象外、code CLI で管理）
 ├── docs/         ghostty / starship / eval-cache / tools ガイド
