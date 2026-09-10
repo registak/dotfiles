@@ -1,5 +1,5 @@
 export LANG=ja_JP.UTF-8
-typeset -U path
+typeset -U PATH path
 
 # Homebrew (eval 不要、直接展開で高速)
 export HOMEBREW_PREFIX="/opt/homebrew"
