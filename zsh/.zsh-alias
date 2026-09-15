@@ -42,8 +42,11 @@ alias vi="vim"
 # ===== shell
 alias reload='source ~/.zshrc'  # PATH 等は source ~/.zshenv か exec zsh
 alias mkd='mkdir -p'
-alias cp='cp -i'
-alias mv='mv -i'
+# Claude Code の非対話シェルは stdin が即 EOF になり、-i の確認が否定扱いで黙って失敗する
+if [[ -z "$CLAUDECODE" ]]; then
+  alias cp='cp -i'
+  alias mv='mv -i'
+fi
 
 # ===== system
 alias myip='curl -s ifconfig.me'

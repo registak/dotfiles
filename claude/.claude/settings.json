@@ -17,9 +17,9 @@
       "mcp__slack__slack_read_thread",
       "mcp__slack__slack_read_user_profile",
       "mcp__slack__slack_read_canvas"
-    ]
+    ],
+    "defaultMode": "auto"
   },
-  "model": "claude-fable-5",
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline-command.sh"
