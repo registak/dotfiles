@@ -8,7 +8,7 @@ font-feature = "liga"
 adjust-cell-height = 25%
 
 # Theme
-theme = "catppuccin-mocha"
+theme = "Catppuccin Mocha"
 
 # Window
 window-padding-x = 8

@@ -41,7 +41,7 @@ adjust-cell-height = 25%
 ### Theme — テーマ
 
 ```
-theme = "catppuccin-mocha"
+theme = "Catppuccin Mocha"
 ```
 
 Ghostty には多数のビルトインテーマが含まれている。
@@ -51,8 +51,8 @@ Ghostty には多数のビルトインテーマが含まれている。
 ghostty +list-themes
 
 # 人気テーマ例
-# catppuccin-mocha, catppuccin-latte, dracula, tokyo-night,
-# gruvbox-dark, nord, one-dark, solarized-dark
+# Catppuccin Mocha, Catppuccin Latte, Dracula, TokyoNight,
+# Gruvbox Dark, Nord, Atom One Dark, Solarized Dark Higher Contrast
 ```
 
 ### Window — ウィンドウ設定
