@@ -2,4 +2,3 @@
 # パスが変わり、入れたものが見えなくなる。入れ直し:
 #   python3 -m pip install --user -r ~/.config/mise/python-user-packages.txt
 python-pptx
-pykakasi
