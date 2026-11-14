@@ -175,6 +175,9 @@ if [[ -f "${HOME}/.zsh-alias" ]]; then
   source "${HOME}/.zsh-alias"
 fi
 
+# このPCだけの設定はリポジトリに含めない。
+[[ -f "${HOME}/.zshrc.local" ]] && source "${HOME}/.zshrc.local"
+
 # ============================================================
 # 10. External completions
 # ============================================================
