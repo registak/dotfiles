@@ -48,6 +48,26 @@ if [[ -n "$model_name" ]]; then
 fi
 
 # ---------------------------------------------------------------------------
+# Account: domain and plan of the logged-in account
+# ---------------------------------------------------------------------------
+# 入力の JSON にアカウントの項目が無いので、起動中の設定ディレクトリのログイン情報から読む。
+account_file="${CLAUDE_CONFIG_DIR:+$CLAUDE_CONFIG_DIR/.claude.json}"
+account_file="${account_file:-$HOME/.claude.json}"
+account_display=""
+if [[ -r "$account_file" ]]; then
+    IFS=$'\t' read -r account_domain account_plan < <(jq -r '
+        .oauthAccount // {}
+        | [(.emailAddress // "" | split("@") | .[1] // ""),
+           (.organizationType // "" | sub("^claude_"; ""))]
+        | @tsv' "$account_file" 2>/dev/null)
+    if [[ -n "$account_domain" ]]; then
+        account_icon=$(printf '\xef\x80\x87')
+        account_display="${C_TEAL}${account_icon} ${account_domain}${C_RESET}"
+        [[ -n "$account_plan" ]] && account_display="${account_display}${C_DIM}(${account_plan})${C_RESET}"
+    fi
+fi
+
+# ---------------------------------------------------------------------------
 # Progress bar helper: 7-char bar, returns "filled_chars|empty_chars"
 # Usage: make_bar <used_pct_0_to_100>
 # ---------------------------------------------------------------------------
@@ -167,7 +187,7 @@ fi
 
 # ---------------------------------------------------------------------------
 # Build status line (up to 4 rows)
-# Row 1: model | ctx
+# Row 1: account | model | ctx
 # Row 2: 5h | 7d  (only when rate limits are available)
 # Row 3: cwd [branch] [vim mode]
 # Row 4: resume
@@ -183,6 +203,7 @@ join_parts() {
 }
 
 row1_parts=()
+[[ -n "$account_display" ]] && row1_parts+=("$account_display")
 [[ -n "$model_display" ]] && row1_parts+=("$model_display")
 [[ -n "$ctx_display" ]]   && row1_parts+=("$ctx_display")
 
