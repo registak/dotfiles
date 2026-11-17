@@ -47,6 +47,19 @@ if [[ -n "$model_name" ]]; then
     model_display="${C_LAVENDER}${model_icon} ${short}${C_RESET}"
 fi
 
+# effort は対応モデルのときだけ入力に含まれる
+effort_level=$(echo "$input" | jq -r '.effort.level // empty')
+if [[ -n "$effort_level" && -n "$model_display" ]]; then
+    case "$effort_level" in
+        low)       effort_color="$C_GREEN" ;;
+        medium)    effort_color="$C_TEAL" ;;
+        high)      effort_color="$C_YELLOW" ;;
+        xhigh|max) effort_color="$C_PEACH" ;;
+        *)         effort_color="$C_DIM" ;;
+    esac
+    model_display="${model_display}${C_DIM}:${C_RESET}${effort_color}${effort_level}${C_RESET}"
+fi
+
 # ---------------------------------------------------------------------------
 # Account: domain and plan of the logged-in account
 # ---------------------------------------------------------------------------
