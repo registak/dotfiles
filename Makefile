@@ -1,17 +1,19 @@
 # dotfiles — よく使うコマンド
-STOW_PACKAGES := zsh git vim starship ghostty mise claude glow
 DOTFILES_DIR := $(abspath .)
 
-.PHONY: stow brew mise-install install
+.PHONY: link status brew bootstrap install
 
-stow:
-	cd "$(DOTFILES_DIR)" && stow -v --no-folding -t "$(HOME)" $(STOW_PACKAGES)
+link:
+	mise dotfiles apply
+
+status:
+	mise bootstrap status
 
 brew:
 	brew bundle --file="$(DOTFILES_DIR)/Brewfile"
 
-mise-install:
-	mise install
+bootstrap:
+	mise bootstrap
 
 install:
 	./install.sh

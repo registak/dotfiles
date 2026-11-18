@@ -1,6 +1,6 @@
 # dotfiles
 
-macOS (Apple Silicon) 向けの個人 dotfiles。GNU Stow でシンボリックリンク管理。
+macOS (Apple Silicon) 向けの個人 dotfiles。mise bootstrap でシンボリックリンクとセットアップを管理。
 
 ## 構成
 
@@ -13,18 +13,28 @@ ghostty/   .config/ghostty/config
 mise/      .config/mise/config.toml
 claude/    .claude/（Claude Code 用）
 glow/      Library/Preferences/glow/（glow 設定）
-vscode/    extensions.txt（stow 対象外、code CLI で管理）
+vscode/    extensions.txt（リンク対象外、code CLI で管理）
 docs/      各ツールのガイド
 ```
 
-## Stow
+## mise bootstrap
+
+`mise/.config/mise/config.toml` がグローバル設定を兼ねる。
+
+- `[bootstrap] dotfile_groups` — `~` へファイル単位でリンクするディレクトリ
+- `[tasks.bootstrap]` — ローカル設定の雛形、Claude Code、VS Code 拡張の導入。毎回実行されるので、何度実行しても同じ結果になるように書く
+- `[tools]` — ランタイム。バージョンは `mise.lock` で固定
 
 ```bash
-cd ~/.dotfiles && stow --no-folding -t ~ zsh git vim starship ghostty mise claude glow
-# vscode は stow 対象外。extensions は install.sh が `code --install-extension` で入れる
+mise bootstrap --dry-run   # 変更内容の確認
+mise bootstrap             # リンク・ランタイム・bootstrap タスク
+mise dotfiles apply        # リンクだけ更新
+mise bootstrap status      # 状態の確認
 ```
 
-新しいファイルを追加した場合は対応パッケージに配置して `stow` を再実行する。
+新しいファイルを追加した場合は対応ディレクトリに配置して `mise dotfiles apply` を実行する。ディレクトリを増やした場合は `dotfile_groups` に追加する。
+
+Homebrew のパッケージは Brewfile で管理し、`[bootstrap.packages]` は使わない。
 
 ## スタック
 
@@ -67,14 +77,14 @@ catppuccin-mocha で統一（Ghostty, Starship, Vim, lightline）、glow は tok
 
 ## 初期セットアップ
 
-- `~/.gitconfig.local` / `~/.gitignore_global` はリポジトリ直下の `*.example` から install.sh が初期化する（未存在時のみ）
-- Claude Code は install.sh が native install で導入する（公式推奨、バックグラウンド自動更新あり）。Brewfile には含めない
+- `~/.gitconfig.local` / `~/.gitignore_global` はリポジトリ直下の `*.example` から bootstrap タスクが初期化する（未存在時のみ）
+- Claude Code は bootstrap タスクが native install で導入する（公式推奨、バックグラウンド自動更新あり）。Brewfile には含めない
 
 ## ルール
 
 - 不要になったツール・設定は残さず削除する
 - Homebrew の eval は使わず直接展開する（速度優先）
-- mise の eval も使わず shims PATH で対応する
+- mise の eval も使わず shims PATH で対応する。`[bootstrap.mise_shell_activate]` は eval を書き込むので設定しない
 - `typeset -U path` で PATH 重複を排除する
 - zoxide / starship は `~/.cache/zsh/` にキャッシュし、バイナリ更新時に自動再生成
 - fzf は fd（ファイル検索）・bat（プレビュー）と連携（.zshrc で設定済み）

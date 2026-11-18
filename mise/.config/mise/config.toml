@@ -1,3 +1,38 @@
+[settings]
+dotfiles.relative_symlinks = true
+lockfile = true
+lockfile_platforms = ["macos-arm64"]
+
+[bootstrap]
+dotfile_groups = ["zsh", "git", "vim", "starship", "ghostty", "mise", "claude", "glow"]
+
+[tasks.bootstrap]
+description = "ローカル設定の雛形・Claude Code・VS Code 拡張を入れる"
+run = '''
+set -e
+dotfiles="$HOME/.dotfiles"
+
+if [ ! -f "$HOME/.gitconfig.local" ]; then
+  cp "$dotfiles/.gitconfig.local.example" "$HOME/.gitconfig.local"
+  echo "~/.gitconfig.local を編集して name / email を設定してください"
+fi
+if [ ! -f "$HOME/.gitignore_global" ]; then
+  cp "$dotfiles/.gitignore_global.example" "$HOME/.gitignore_global"
+fi
+
+if ! command -v claude >/dev/null 2>&1; then
+  curl -fsSL https://claude.ai/install.sh | bash
+fi
+
+if command -v code >/dev/null 2>&1; then
+  installed="$(code --list-extensions)"
+  while IFS= read -r ext; do
+    [ -n "$ext" ] || continue
+    echo "$installed" | grep -qix "$ext" || code --install-extension "$ext"
+  done < "$dotfiles/vscode/extensions.txt"
+fi
+'''
+
 [tools]
 bun = "latest"
 node = "latest"

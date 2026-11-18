@@ -1,6 +1,6 @@
 # dotfiles
 
-GNU Stow で管理する dotfiles。
+mise bootstrap で管理する dotfiles。
 
 ## Setup
 
@@ -21,28 +21,34 @@ cd ~/.dotfiles
 `install.sh` は以下を実行します：
 
 1. Homebrew のインストール（未導入の場合）
-2. `stow` で各設定のシンボリックリンクを作成（`zsh` / `git` / `vim` / `starship` / `ghostty` / `mise` / `claude` / `glow`）
-3. `~/.gitconfig.local` / `~/.gitignore_global` を `*.example` から初期化（未存在時のみ）
-4. `brew bundle` でパッケージ・アプリを一括インストール
-5. `mise install` で [mise/.config/mise/config.toml](mise/.config/mise/config.toml) のランタイムを入れる
-6. [Claude Code](https://code.claude.com/) を native install（未導入時のみ、以降バックグラウンド自動更新）
-7. VS Code 拡張の一括インストール（`code` がある場合）
+2. `brew bundle` でパッケージ・アプリを一括インストール（mise もここで入る）
+3. `mise bootstrap` を実行
+
+`mise bootstrap` は [mise/.config/mise/config.toml](mise/.config/mise/config.toml) に従って以下を行います：
+
+1. `[bootstrap] dotfile_groups` に並べたディレクトリを、ファイル単位のシンボリックリンクで `~` に展開
+2. `[tools]` のランタイムを `mise.lock` のバージョンで入れる
+3. `bootstrap` タスクを実行
+   - `~/.gitconfig.local` / `~/.gitignore_global` を `*.example` から初期化（未存在時のみ）
+   - [Claude Code](https://code.claude.com/) を native install（未導入時のみ、以降バックグラウンド自動更新）
+   - VS Code 拡張のうち未導入のものをインストール（`code` がある場合）
 
 セットアップ完了後にやること:
 
 - `~/.gitconfig.local` を編集して `name` / `email` を自分の情報に置き換える
 - `claude` を起動して `/login` で認証
 
-### Stow の衝突時
+### リンク先に同名ファイルがあるとき
 
-既に同名ファイルがあると stow が失敗することがある。そのときはバックアップを取ったうえで GNU Stow の `stow --adopt`（要確認: バージョンにより挙動が異なる）で取り込む、または手で退避してから `stow` し直す。
+`mise dotfiles diff` で差分を確認し、リポジトリ側に取り込むなら `mise dotfiles add --group <名前> <ファイル>`、リポジトリ側で上書きするならバックアップを取ったうえで `mise dotfiles apply --force` を使う。
 
 ### 日常コマンド（Makefile）
 
 - `make install` — install.sh をフル実行
-- `make stow` — シンボリックリンクを更新
+- `make bootstrap` — `mise bootstrap` を実行（リンク・ランタイム・bootstrap タスク）
+- `make link` — シンボリックリンクだけ更新
+- `make status` — リンクとランタイムの状態を表示
 - `make brew` — Brewfile を反映
-- `make mise-install` — mise ツールをインストール
 
 ## Structure
 
@@ -53,10 +59,10 @@ cd ~/.dotfiles
 ├── vim/          .vimrc, .vim/
 ├── starship/     .config/starship.toml
 ├── ghostty/      .config/ghostty/config
-├── mise/         .config/mise/config.toml
+├── mise/         .config/mise/config.toml, mise.lock
 ├── claude/       .claude/（CLAUDE.md, settings.json, rules/, statusline-command.sh）
 ├── glow/         Library/Preferences/glow/（glow 設定）
-├── vscode/       extensions.txt（stow 対象外、code CLI で管理）
+├── vscode/       extensions.txt（リンク対象外、code CLI で管理）
 ├── docs/         ghostty / starship / eval-cache / tools ガイド
 ├── .gitconfig.local.example      個人情報（name / email）の雛形
 ├── .gitignore_global.example     グローバル除外リストの雛形
@@ -70,8 +76,14 @@ cd ~/.dotfiles
 
 1. パッケージディレクトリを作成（例: `mkdir -p newapp/.config/newapp`）
 2. 設定ファイルを配置
-3. `install.sh` の `stow` 行にパッケージ名を追加
-4. `stow --no-folding -t ~ newapp` で反映（dry-run は `stow -n -v --no-folding -t ~ newapp`）
+3. [mise/.config/mise/config.toml](mise/.config/mise/config.toml) の `dotfile_groups` にディレクトリ名を追加
+4. `mise dotfiles apply` で反映（dry-run は `mise dotfiles apply --dry-run`）
+
+リポジトリからファイルを消したあとに残ったリンクは `mise dotfiles apply --prune` で片付ける。
+
+## ランタイムの更新
+
+`[tools]` は `latest` 指定で、実際に入るバージョンは `mise.lock` が決める。上げるときは `mise upgrade` を実行し、変わった `mise.lock` をコミットする。
 
 ## Brewfile のメンテ
 
