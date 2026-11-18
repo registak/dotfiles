@@ -173,7 +173,8 @@ dotfiles で設定しているキーバインド・エイリアス・カスタ�
 | コマンド | 動作 |
 |----------|------|
 | `make install` | install.sh をフル実行 |
-| `make stow` | シンボリックリンクを更新 |
+| `make bootstrap` | `mise bootstrap` を実行 |
+| `make link` | シンボリックリンクを更新 |
+| `make status` | リンクとランタイムの状態を表示 |
 | `make brew` | Brewfile を反映 |
-| `make mise-install` | mise ツールをインストール |
 | `rm -rf ~/.cache/zsh/` | zoxide/starship のキャッシュをリセット |

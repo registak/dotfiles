@@ -179,6 +179,7 @@ python3 --version
 - `.zshenv` で `~/.local/share/mise/shims` に PATH を通している
 - プロジェクトに `.mise.toml` があれば自動でバージョンが切り替わる
 - `eval "$(mise activate zsh)"` 不要（shims 方式で高速）
+- グローバルのバージョンは `~/.config/mise/mise.lock` で固定。上げるときは `mise upgrade`
 
 ---
 
@@ -224,29 +225,27 @@ cd ~/somewhere      # 普通の cd はそのまま動く
 
 ---
 
-## stow — dotfiles のシンボリックリンク管理
+## mise dotfiles — dotfiles のシンボリックリンク管理
 
-ディレクトリ構造をそのままホームディレクトリに展開（symlink）するツール。
+ディレクトリ構造をそのままホームディレクトリに展開（symlink）する。対象のディレクトリは `~/.config/mise/config.toml` の `[bootstrap] dotfile_groups` に並べる。
 
 ### 今の使い方
 
 ```bash
-cd ~/.dotfiles
-
-# 全パッケージの symlink を作成（install.sh がやっていること）
-stow --no-folding -t ~ zsh git vim starship ghostty mise claude glow
-
-# 特定のパッケージだけ
-stow --no-folding -t ~ zsh
-
-# symlink を削除
-stow -t ~ -D zsh
-
-# 再作成（削除 → 作成）
-stow -t ~ -R zsh
+# 全ディレクトリの symlink を作成（mise bootstrap がやっていること）
+mise dotfiles apply
 
 # 何が起きるか確認（dry-run）
-stow -t ~ -n -v zsh
+mise dotfiles apply --dry-run
+
+# 状態の確認
+mise dotfiles status
+
+# 特定のディレクトリの symlink を削除
+mise dotfiles unapply --group zsh
+
+# リポジトリから消したファイルのリンクを片付ける
+mise dotfiles apply --prune
 ```
 
 ### 新しい設定を追加するとき
@@ -254,26 +253,24 @@ stow -t ~ -n -v zsh
 ```bash
 # 例: ~/.config/wezterm/wezterm.lua を管理したい場合
 
-# 1. パッケージディレクトリを作る（ホームからの相対パスを再現）
+# 1. ディレクトリを作る（ホームからの相対パスを再現）
 mkdir -p ~/.dotfiles/wezterm/.config/wezterm
 
 # 2. 設定ファイルを移動
 mv ~/.config/wezterm/wezterm.lua ~/.dotfiles/wezterm/.config/wezterm/
 
-# 3. stow で symlink 作成
-cd ~/.dotfiles
-stow -t ~ wezterm
+# 3. config.toml の dotfile_groups に "wezterm" を追加
 
-# 4. install.sh にパッケージ名を追加
-# stow -v -t "$HOME" zsh git vim starship ghostty wezterm
+# 4. symlink 作成
+mise dotfiles apply
 ```
 
 ### 仕組み
 ```
-.dotfiles/zsh/.zshrc  →  stow  →  ~/.zshrc (symlink)
-.dotfiles/starship/.config/starship.toml  →  stow  →  ~/.config/starship.toml (symlink)
+.dotfiles/zsh/.zshrc  →  ~/.zshrc (symlink)
+.dotfiles/starship/.config/starship.toml  →  ~/.config/starship.toml (symlink)
 ```
-パッケージ内のディレクトリ構造がそのまま `~` に展開される。
+ディレクトリ内の構造がそのまま `~` に展開される。
 
 ---
 
