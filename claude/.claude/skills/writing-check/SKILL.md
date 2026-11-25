@@ -1,6 +1,6 @@
 ---
 name: writing-check
-description: 人が読む日本語の文書を、書き出す前に `~/.claude/rules/japanese-writing.md` に照らして点検し、AI の書き癖と読みにくい箇所を直すスキル。Notion・Claude Docs・Artifact・共有する Markdown・スライドの文面・長めの Slack やメールの文面を書き出す前に必ず使う。「Notion にまとめて」「ドキュメント化して」「資料にして」と言われて文書を作るとき、「文章を見直して」「推敲して」「読みやすくして」「AI っぽい」「日本語が不自然」と言われたときにも使う。数行の文面とチャットの返答には使わない。コードのコメントにも使わない（そちらは comment-cleanup）。
+description: 人が読む日本語の文書を、書き出す前に `~/.claude/rules/japanese-writing.md` に照らして点検し、AI の書き癖と読みにくい箇所を直すスキル。Notion・Claude Docs・Artifact・共有する Markdown・スライドの文面・長めの Slack やメールの文面を書き出す前に必ず使う。文書の作成を頼まれたとき、既存の文章の見直しや推敲を頼まれたとき、文章が機械的、不自然だと指摘されたときにも使う。数行の文面とチャットの返答には使わない。コードのコメントにも使わない（そちらは comment-cleanup）。
 argument-hint: "[対象ファイルや依頼内容]"
 metadata:
   author: murayama
