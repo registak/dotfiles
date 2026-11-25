@@ -1,14 +1,10 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "env": {
-    "CLAUDE_CODE_ENABLE_TELEMETRY": "1"
-  },
   "permissions": {
     "allow": [
       "mcp__notion__notion-fetch",
       "mcp__notion__notion-search",
       "mcp__notion__notion-query-meeting-notes",
-      "mcp__notion__notion-query-database-view",
       "mcp__notion__notion-query-data-sources",
       "mcp__slack__slack_search_public_and_private",
       "mcp__slack__slack_search_channels",
@@ -17,6 +13,10 @@
       "mcp__slack__slack_read_thread",
       "mcp__slack__slack_read_user_profile",
       "mcp__slack__slack_read_canvas"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)"
     ],
     "defaultMode": "auto"
   },
