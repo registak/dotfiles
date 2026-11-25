@@ -20,7 +20,6 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "fable",
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline-command.sh"
@@ -42,7 +41,7 @@
   "language": "日本語",
   "modelSettings": {
     "claude-fable-5-2": {
-      "effortLevel": "high"
+      "effortLevel": "medium"
     },
     "claude-opus-5-5": {
       "effortLevel": "high"
@@ -53,5 +52,6 @@
   "autoCompactEnabled": true,
   "autoContinueAtUsageLimit": true,
   "remoteControlAtStartup": true,
-  "agentPushNotifEnabled": true
+  "agentPushNotifEnabled": true,
+  "model": "fable"
 }
