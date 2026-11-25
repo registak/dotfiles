@@ -21,11 +21,10 @@
 
 ## 作業スタイル
 
-- 大きく独立した作業はAgentを並列起動して処理する
-- 実装を伴うAgentはworktreeで分離する（`isolation: "worktree"`）
+- 実装を伴うAgentを並列で走らせるときはworktreeで分離する（`isolation: "worktree"`）
 - コミットメッセージはConventional Commits形式
 - コミットはCIがパスする最小の動作単位で切る
-- コミット前に `/comment-cleanup` を実行し、差分のコメントを `~/.claude/rules/comments.md` に照らして刈る
+- コードの差分を含むコミットの前に `/comment-cleanup` を実行し、差分のコメントを `~/.claude/rules/comments.md` に照らして刈る
 - Issue・PR作成時はリポジトリのテンプレートがあれば使う
 - テスト・lintが存在する変更は、それらがパスする状態で報告する
 - 外部システム（Notion・Sheets・Slack 等）への書き込み・送信は dry-run → 差分提示 → 承認 → 実行 → 再検証の順で行う。承認済みのデータを上書きしない
