@@ -2,21 +2,6 @@
 
 macOS (Apple Silicon) 向けの個人 dotfiles。mise bootstrap でシンボリックリンクとセットアップを管理。
 
-## 構成
-
-```
-zsh/       .zshenv, .zprofile, .zshrc, .zsh-alias
-git/       .gitconfig
-vim/       .vimrc, .vim/
-starship/  .config/starship.toml
-ghostty/   .config/ghostty/config
-mise/      .config/mise/config.toml
-claude/    .claude/（Claude Code 用）
-glow/      Library/Preferences/glow/（glow 設定）
-vscode/    extensions.txt（リンク対象外、code CLI で管理）
-docs/      各ツールのガイド
-```
-
 ## mise bootstrap
 
 `mise/.config/mise/config.toml` がグローバル設定を兼ねる。
@@ -54,26 +39,6 @@ Homebrew のパッケージは Brewfile で管理し、`[bootstrap.packages]` �
 ## テーマ
 
 catppuccin-mocha で統一（Ghostty, Starship, Vim, lightline）、glow は tokyo-night
-
-## Git
-
-- `~/.gitconfig.local` に個人情報（name, email）を分離（リポジトリに含めない）
-- `~/.gitignore_global` でグローバル除外
-- push.autoSetupRemote = true, pull.rebase = true
-- rebase.autoSquash / autoStash = true
-- branch.sort = -committerdate（最近使ったブランチを優先）
-- merge.conflictstyle = zdiff3, rerere.enabled = true
-- diff.algorithm = histogram, fetch.prune = true
-- エイリアス: `vlog`（グラフ付きログ）
-
-## fzf キーバインド
-
-- `Ctrl+T` — ファイル検索（fd + bat プレビュー）
-- `Ctrl+R` — コマンド履歴検索
-- `Alt+C` — ディレクトリ移動（fd + eza プレビュー）
-- `Ctrl+G` — git add 対象を選択（差分プレビュー付き）
-- `Ctrl+S` — SSH 先を選択
-- `Ctrl+]` — ghq リポジトリを選択して cd
 
 ## 初期セットアップ
 
